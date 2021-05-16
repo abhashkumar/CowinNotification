@@ -1,6 +1,5 @@
 Steps to run:
-- install latest node version
-- Go to the project folder, open cmd and install request and moment npm packages
-- To install request: npm i request
-- To install moment: npm i moment
+- run npm install
+- connect this application with one mongodb instance(preferbly local), see dbUtil.js
+- configure email smtp server, see NotifyByMail.js
 - to run the javascript file : node COvin.js
