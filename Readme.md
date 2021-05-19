@@ -1,5 +1,6 @@
 Steps to run:
 - run npm install
-- connect this application with one mongodb instance(preferbly local), see dbUtil.js
-- configure email smtp server, see NotifyByMail.js
-- to run the javascript file : node COvin.js
+- connect this application with one mongodb instance(preferbly local), see dbUtil.ts
+- configure email smtp server, see NotifyByMail.ts
+- build the application : npm run build
+- run the application: npm run test
