@@ -3,24 +3,26 @@ import { sendEmail, mailObj} from './NotifyByMail';
 import { retrieveUserIdObjects } from './dbUtil';
 import moment from 'moment';
 
+const _ = require('lodash');
+
 async function callAPI() {
   var currentDate = moment().format(("DD-MM-YYYY"));
   var url = `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=74&date=${currentDate}`;
   let response = await get(url);
   var centreList = JSON.parse(response.body);
-  var centerWithAvailablility = [];
-  for(let i = 0; i < centreList.centers.length;i++){
-    var sessions = centreList.centers[i].sessions;
-    for(let j = 0; j < sessions.length; j++) {
-      if(sessions[j].min_age_limit >= 18 && sessions[j].available_capacity > 0) {
-      console.log('vaccine available');
-      console.log(centreList.centers[i].pincode);
-      var location = {"address": centreList.centers[i].address, "pincode":centreList.centers[i].pincode};
-      centerWithAvailablility.push(location);
-      break;
+  var centerWithAvailablility: any[] = [];
+  _.each(centreList.centers, function(center:any) {
+    var sessions = center.sessions;
+    _.each(sessions, function(session: any){
+      if(session.min_age_limit >= 18 && session.available_capacity > 0) {
+        console.log('vaccine available');
+        console.log(center.pincode);
+        var location = {"address": center.address, "pincode":center.pincode};
+        centerWithAvailablility.push(location);
+        return false;
       }
-    }
-  }
+    });
+  });
   if(centerWithAvailablility.length > 0) {
     var user:any = [];
     var res:any = await retrieveUserIdObjects();
