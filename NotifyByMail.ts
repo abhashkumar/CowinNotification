@@ -17,6 +17,6 @@ export async function sendEmail(mail:any) {
         }
     });
     const info = await smtpTransport.sendMail(mail);
-    console.log("Message sent: %s", info.messageId);
+    console.log(`Message sent: ${info.messageId}`);
     smtpTransport.close();
 }
