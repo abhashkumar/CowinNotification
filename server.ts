@@ -14,11 +14,11 @@ app.use(bodyParser.json());
 
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname,'..', 'index.html'));
 });
 
 app.get('/covid19logo', function (req, res) {
-  let img = fs.readFileSync(path.join(__dirname, "covid19logo.jpg"));
+  let img = fs.readFileSync(path.join(__dirname,'..', "covid19logo.jpg"));
   res.writeHead(200, {'Content-Type': 'image/jpg' });
   res.end(img, 'binary');
 });
